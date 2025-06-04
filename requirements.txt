@@ -3,4 +3,4 @@ tensorflow
 joblib
 pandas
 numpy
-PIL
+Pillow
