@@ -75,11 +75,9 @@ elif model_type == "Text Classification":
             st.warning("Please enter text.")
         else:
             # Vectorize manually if TextVectorization not embedded
-            vectorizer = TextVectorization(max_tokens=10000, output_sequence_length=250)
-            df = pd.read_csv("your_training_data.csv")  # Replace with actual CSV if needed
-            vectorizer.adapt(df["X"].values)
-            vec_input = vectorizer(tf.constant([user_input]))
-            pred = model.predict(vec_input)[0][0]
+            model = tf.keras.models.load_model("model_text.keras")
+            pred = model.predict(tf.constant([user_input]))[0][0]
+
             label = "Positive" if pred > 0.5 else "Negative"
             st.markdown(f"### Prediction: **{label}** ({pred:.2f})")
 
